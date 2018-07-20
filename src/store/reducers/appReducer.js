@@ -42,11 +42,7 @@ export const epics = createEpicScenario({
     type: 'APP_USER_FETCH',
     epic: (fromAction, store) =>
       AuthService.getCurrentUser()
-        .flatMap(payload => {
-          const actions = [];
-          actions.push(toActionCreator(redux.actions.updateUser, fromAction)(payload));
-          return actions;
-        })
+        .map(toActionCreator(redux.actions.updateUser, fromAction))
         .catch(handleError(fromAction))
   },
 

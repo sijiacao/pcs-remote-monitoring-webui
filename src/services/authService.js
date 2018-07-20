@@ -1,10 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 
 import Config from 'app.config';
-import { HttpClient } from './httpClient';
-import { toUserModel } from './models';
 import AuthenticationContext from 'adal-angular/dist/adal.min.js'
 import { Observable } from 'rxjs';
+import { HttpClient } from './httpClient';
+import { toUserModel, authDisabledUser } from './models';
 
 const ENDPOINT = Config.serviceUrls.auth;
 
@@ -109,6 +109,10 @@ export class AuthService {
 
   /** Returns a the current user */
   static getCurrentUser() {
+    if (AuthService.isDisabled()) {
+      return Observable.of(authDisabledUser);
+    }
+
     return HttpClient.get(`${ENDPOINT}users/current`)
       .map(toUserModel);
   }

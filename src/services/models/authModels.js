@@ -29,3 +29,11 @@ export const toUserModel = (user = {}) => camelCaseReshape(user, {
   'name': 'name',
   'allowedActions': 'permissions'
 });
+
+//When authentication is disabled, this user has all permissions.
+export const authDisabledUser = {
+  id: 'AuthIsDisabled',
+  email: 'authdisabled@iot.auth',
+  name: 'Disabled Auth',
+  permissions: Object.values(permissions)
+};
