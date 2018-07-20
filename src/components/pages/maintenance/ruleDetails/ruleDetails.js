@@ -203,18 +203,18 @@ export class RuleDetails extends Component {
     const alertContextBtns =
       selectedRows.length > 0
         ? [
-            <Protected permission={permissions.updateAlarms}>
-              <Btn svg={svgs.closeAlert} onClick={this.closeAlerts} key="close">
+            <Protected key="close" permission={permissions.updateAlarms}>
+              <Btn svg={svgs.closeAlert} onClick={this.closeAlerts}>
                 <Trans i18nKey="maintenance.close">Close</Trans>
               </Btn>
             </Protected>,
-            <Protected permission={permissions.updateAlarms}>
-              <Btn svg={svgs.ackAlert} onClick={this.ackAlerts} key="ack">
+            <Protected key="ack" permission={permissions.updateAlarms}>
+              <Btn svg={svgs.ackAlert} onClick={this.ackAlerts}>
                 <Trans i18nKey="maintenance.acknowledge">Acknowledge</Trans>
               </Btn>
             </Protected>,
-            <Protected permission={permissions.deleteAlarms}>
-              <Btn svg={svgs.trash} onClick={this.deleteAlerts} key="delete">
+            <Protected key="delete" permission={permissions.deleteAlarms}>
+              <Btn svg={svgs.trash} onClick={this.deleteAlerts}>
                 <Trans i18nKey="maintenance.delete">Delete</Trans>
               </Btn>
             </Protected>

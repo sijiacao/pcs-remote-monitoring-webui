@@ -42,32 +42,32 @@ export class RulesGrid extends Component {
 
     this.contextBtns = {
       disable:
-        <Protected permission={permissions.updateRules}>
-          <Btn key="disable" className="rule-status-btn" svg={svgs.disableToggle} onClick={this.openStatusFlyout}>
+        <Protected key="disable" permission={permissions.updateRules}>
+          <Btn className="rule-status-btn" svg={svgs.disableToggle} onClick={this.openStatusFlyout}>
             <Trans i18nKey="rules.flyouts.disable">Disable</Trans>
           </Btn>
         </Protected>,
       enable:
-        <Protected permission={permissions.updateRules}>
-          <Btn key="enable" className="rule-status-btn enabled" svg={svgs.enableToggle} onClick={this.openStatusFlyout}>
+        <Protected key="enable" permission={permissions.updateRules}>
+          <Btn className="rule-status-btn enabled" svg={svgs.enableToggle} onClick={this.openStatusFlyout}>
             <Trans i18nKey="rules.flyouts.enable">Enable</Trans>
           </Btn>
         </Protected>,
       changeStatus:
-        <Protected permission={permissions.updateRules}>
-          <Btn key="changeStatus" className="rule-status-btn" svg={svgs.changeStatus} onClick={this.openStatusFlyout}>
+        <Protected key="changeStatus" permission={permissions.updateRules}>
+          <Btn className="rule-status-btn" svg={svgs.changeStatus} onClick={this.openStatusFlyout}>
             <Trans i18nKey="rules.flyouts.changeStatus">Change status</Trans>
           </Btn>
         </Protected>,
       edit:
-        <Protected permission={permissions.updateRules}>
-          <Btn key="edit" svg={svgs.edit} onClick={this.openEditRuleFlyout}>
+        <Protected key="edit"permission={permissions.updateRules}>
+          <Btn svg={svgs.edit} onClick={this.openEditRuleFlyout}>
             {props.t('rules.flyouts.edit')}
           </Btn>
         </Protected>,
       delete:
-        <Protected permission={permissions.deleteRules}>
-          <Btn key="delete" svg={svgs.trash} onClick={this.openDeleteFlyout}>
+        <Protected key="delete"permission={permissions.deleteRules}>
+          <Btn svg={svgs.trash} onClick={this.openDeleteFlyout}>
             <Trans i18nKey="rules.flyouts.delete">Delete</Trans>
           </Btn>
         </Protected>

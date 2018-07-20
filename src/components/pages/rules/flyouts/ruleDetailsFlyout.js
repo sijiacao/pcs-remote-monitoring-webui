@@ -42,8 +42,8 @@ export class RuleDetailsFlyout extends Component {
           {!isEditable
             ?
             [
-              <RuleViewerContainer onClose={onClose} rule={rule} />,
-              <Protected permission={permissions.updateRules}>
+              <RuleViewerContainer key="rule-viewer-container" onClose={onClose} rule={rule} />,
+              <Protected key="rule-eidt-button" permission={permissions.updateRules}>
                 <Btn className="edit-mode-btn" svg={svgs.edit} onClick={this.goToEditMode}>
                   {t('rules.flyouts.edit')}
                 </Btn>
