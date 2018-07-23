@@ -4,8 +4,6 @@ import 'polyfills';
 import Config from 'app.config';
 import { HttpClient } from './httpClient';
 
-
-
 const url = 'http://www.fakeurl.com';
 
 test('ajax request has timeout parameter', () => {
