@@ -1,8 +1,10 @@
 // Copyright (c) Microsoft. All rights reserved.
 
-import { HttpClient } from './httpClient';
-import Config from 'app.config';
 import 'polyfills';
+import Config from 'app.config';
+import { HttpClient } from './httpClient';
+
+
 
 const url = 'http://www.fakeurl.com';
 
