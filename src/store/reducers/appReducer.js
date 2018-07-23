@@ -132,7 +132,7 @@ const initialState = {
   azureMapsKey: '',
   deviceGroupFlyoutIsOpen: false,
   timeInterval: 'PT1H',
-  userPermissions: undefined
+  userPermissions: new Set()
 };
 
 const updateUserReducer = (state, { payload, fromAction }) => {
