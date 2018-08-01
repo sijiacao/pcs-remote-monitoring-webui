@@ -25,7 +25,7 @@ $pillIconSize: 14px;
     @include rem-fallback(height, $pillHeight);
     @include rem-fallback(width, $pillIconSize);
 
-    svg { @include square-px-rem($pillIconSize);}
+    svg { @include square-px-rem($pillIconSize); }
 
     + .pill-text { @include rem-fallback(padding-left, 5px); }
   }
@@ -34,7 +34,13 @@ $pillIconSize: 14px;
     color: themed('colorPillText');
     background-color: themed('colorPillBackground');
 
-    .pill-icon svg { fill: themed('colorPillSvg'); }
+    .pill-box {
+      background-color: themed('colorPillBackgroundSvg');
+    }
+
+    .pill-icon svg {
+      fill: themed('colorPillSvg');
+    }
 
     &:focus { outline: 1px dashed themed('colorBtnOutlineFocus'); }
 
@@ -42,7 +48,13 @@ $pillIconSize: 14px;
       color: themed('colorPillTextHover');
       background-color: themed('colorPillBackgroundHover');
 
-      .pill-icon svg { fill: themed('colorPillSvgHover'); }
+      .pill-box {
+        background-color: themed('colorPillBackgroundSvgHover');
+      }
+
+      .pill-icon svg {
+        fill: themed('colorPillSvgHover');
+      }
     }
 
     &:active {
