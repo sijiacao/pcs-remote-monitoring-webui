@@ -8,11 +8,7 @@ import './styles/pill.css';
 export const Pill = ({ svg, label, onSvgClick }) => (
     <div className="pill" onClick={onSvgClick}>
       { label }
-      { svg &&
-        <div className="pill-box">
-          <Svg path={svg} className="pill-icon" />
-        </div>
-      }
+      { svg && <Svg path={svg} className="pill-icon" /> }
     </div>
   );
 

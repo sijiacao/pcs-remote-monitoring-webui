@@ -34,10 +34,6 @@ $pillIconSize: 14px;
     color: themed('colorPillText');
     background-color: themed('colorPillBackground');
 
-    .pill-box {
-      background-color: themed('colorPillBackgroundSvg');
-    }
-
     .pill-icon svg {
       fill: themed('colorPillSvg');
     }
@@ -47,10 +43,6 @@ $pillIconSize: 14px;
     &:hover {
       color: themed('colorPillTextHover');
       background-color: themed('colorPillBackgroundHover');
-
-      .pill-box {
-        background-color: themed('colorPillBackgroundSvgHover');
-      }
 
       .pill-icon svg {
         fill: themed('colorPillSvgHover');
