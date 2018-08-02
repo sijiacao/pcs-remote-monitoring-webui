@@ -5,7 +5,9 @@
 
 $pillHeight: 30px;
 $pillMinWidth: 127px;
-$pillIconSize: 14px;
+$pillIconSize: 16px;
+$pillIconWrapperSize: 30px;
+
 .pill {
   display: flex;
   flex-shrink: 0;
@@ -23,7 +25,8 @@ $pillIconSize: 14px;
   .pill-icon {
     position: relative;
     @include rem-fallback(height, $pillHeight);
-    @include rem-fallback(width, $pillIconSize);
+    @include rem-fallback(width, $pillIconWrapperSize);
+    margin-right: -8px;
 
     svg { @include square-px-rem($pillIconSize); }
 
@@ -33,6 +36,10 @@ $pillIconSize: 14px;
   @include themify($themes) {
     color: themed('colorPillText');
     background-color: themed('colorPillBackground');
+
+    .pill-icon {
+      background-color: themed('colorPillBackgroundSvg');
+    }
 
     .pill-icon svg {
       fill: themed('colorPillSvg');
@@ -44,9 +51,14 @@ $pillIconSize: 14px;
       color: themed('colorPillTextHover');
       background-color: themed('colorPillBackgroundHover');
 
+      .pill-icon {
+        background-color: themed('colorPillBackgroundSvgHover');
+      }
+
       .pill-icon svg {
         fill: themed('colorPillSvgHover');
       }
+
     }
 
     &:active {

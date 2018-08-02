@@ -6,9 +6,9 @@ import { Svg } from 'components/shared/svg/svg';
 import './styles/pill.css';
 
 export const Pill = ({ svg, label, onSvgClick }) => (
-    <div className="pill" onClick={onSvgClick}>
+    <div className="pill">
       { label }
-      { svg && <Svg path={svg} className="pill-icon" /> }
+      { svg && <Svg onClick={onSvgClick} path={svg} className="pill-icon" /> }
     </div>
   );
 
