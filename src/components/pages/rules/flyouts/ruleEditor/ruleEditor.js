@@ -44,20 +44,6 @@ import update from 'immutability-helper';
 import './ruleEditor.css';
 
 const Section = Flyout.Section;
-const calculations = ['Average', 'Instant'];
-// Represented in milliSeconds
-const timePeriodOptions = [
-  { label: '1', value: '60000' },
-  { label: '5', value: '300000' },
-  { label: '10', value: '600000' }
-];
-const operatorOptions = [
-  { label: '>', value: 'GreaterThan' },
-  { label: '>=', value: 'GreaterThanOrEqual' },
-  { label: '<', value: 'LessThan' },
-  { label: '<=', value: 'LessThanOrEqual' },
-  { label: '=', value: 'Equals' }
-];
 
 // A counter for creating unique keys per new condition
 let conditionKey = 0;
@@ -76,8 +62,9 @@ const newCondition = () => ({
 const newAction = () => ({
   type: 'Email',
   parameters: {
-    email: [],
-    template: ''
+    recipients: [],
+    notes: '',
+    subject: ''
   },
   key: actionKey++
 })
@@ -385,12 +372,12 @@ export class RuleEditor extends LinkedComponent {
 
     const actionLinks = this.actionsLink.getLinkedChildren(actionLink => {
       const parametersLink = actionLink.forkTo('parameters');
-      const emailLink = parametersLink.forkTo('email')
+      const recipientsLink = parametersLink.forkTo('recipients')
         .check(Validator.notEmpty, this.props.t('deviceGroupsFlyout.errorMsg.isRequired'));
-      const templateLink = parametersLink.forkTo('template')
-        .check(Validator.notEmpty, this.props.t('deviceGroupsFlyout.errorMsg.isRequired'));
-      const error = formData.actionEnabled ? (emailLink.error || templateLink.error) : false;
-      return { emailLink, templateLink, error };
+      const notesLink = parametersLink.forkTo('notes');
+      const subjectLink = parametersLink.forkTo('subject');
+      const error = formData.actionEnabled ? (recipientsLink.error) : false;
+      return { recipientsLink, notesLink, subjectLink, error };
     });
 
     const conditionsHaveErrors = conditionLinks.some(({ error }) => error);
@@ -557,20 +544,27 @@ export class RuleEditor extends LinkedComponent {
                           <FormControl
                             type="text"
                             className="long"
-                            onKeyPress={this.onAddEmail(action.emailLink)}
+                            onKeyPress={this.onAddEmail(action.recipientsLink)}
                             link={this.newEmailLink}
                             placeholder={t('rules.flyouts.ruleEditor.actions.enterEmail')} />
                         </FormGroup>
                         <PillFormControl
-                          pills={action.emailLink.value}
+                          pills={action.recipientsLink.value}
                           svg={svgs.cancelX}
-                          onSvgClick={this.deletePill(action.emailLink)} />
-                        <p className="padded-top">{t('rules.flyouts.ruleEditor.actions.emailComments')}</p>
+                          onSvgClick={this.deletePill(action.recipientsLink)} />
+                        <p className="padded-top">{t('rules.flyouts.ruleEditor.actions.emailSubject')}</p>
                         <FormGroup>
                           <FormControl
                             type="textarea"
-                            link={action.templateLink}
-                            placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailComments')} />
+                            link={action.subjectLink}
+                            placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailSubject')}/>
+                        </FormGroup>
+                        <p className="padded-top">{t('rules.flyouts.ruleEditor.actions.emailNotes')}</p>
+                        <FormGroup>
+                          <FormControl
+                            type="textarea"
+                            link={action.notesLink}
+                            placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailNotes')} />
                         </FormGroup>
                       </Section.Content>
                     ))}

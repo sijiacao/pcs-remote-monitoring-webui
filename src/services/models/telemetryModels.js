@@ -150,8 +150,11 @@ export const toEditRuleRequestModel = ({
   const Actions = actions.map(act => ({
     Type: act.type,
     Parameters: {
-      Template: act.parameters.template,
-      Email: act.parameters.email
+      Notes: act.parameters.notes,
+      Recipients: act.parameters.recipients,
+      Subject: act.parameters.subject.length > 0
+        ? act.parameters.subject
+        : 'Azure IoT Remote Monitoring alert: ' + name + " was triggered"
     }
   }));
 
