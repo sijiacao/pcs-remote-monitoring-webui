@@ -80,6 +80,16 @@ $themes: (
     colorHyperlinkOutlineFocus: $colorDarkLinkBorder,
     colorHyperlinkTextDisabled: $colorDarkLinkDisabled,
     // Hyperlink - END
+    // Pill - START
+    colorPillBackground: #3F3F3F,
+    colorPillBackgroundHover: #136BFB,
+    colorPillText: $colorWhite,
+    colorPillTextHover: $colorWhite,
+    colorPillSvg: $colorWhite,
+    colorPillSvgHover: $colorWhite,
+    colorPillBackgroundSvg: #2D2F33,
+    colorPillBackgroundSvgHover: #005A9E,
+    // Pill - END
 
     // Page Content Colors - START
     colorContentBackground: $colorNoir,
@@ -240,6 +250,16 @@ $themes: (
     colorHyperlinkOutlineFocus: $colorLightLinkBorder,
     colorHyperlinkTextDisabled: $colorLightLinkDisabled,
     // Hyperlink - END
+    // Pill - START
+    colorPillBackground: #DADADA,
+    colorPillBackgroundHover: #136BFB,
+    colorPillText: $colorNoir,
+    colorPillTextHover: $colorWhite,
+    colorPillSvg: $colorNoir,
+    colorPillSvgHover: $colorWhite,
+    colorPillBackgroundSvg: #C8C8C8,
+    colorPillBackgroundSvgHover: #005A9E,
+    // Pill - END
 
     // Page Content Colors - START
     colorContentBackground: #f2f2f2, // Grey100

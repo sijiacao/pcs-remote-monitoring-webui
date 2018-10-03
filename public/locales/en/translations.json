@@ -2,9 +2,9 @@
   "companyName": "Contoso",
   "header": {
     "appName": "Azure IoT Remote Monitoring",
-    "logout": "Logout",
     "profile": "Profile",
     "getStarted": "Get started",
+    "logout": "Logout",
     "documentation": "Documentation",
     "sendSuggestion": "Send a suggestion"
   },
@@ -69,6 +69,7 @@
     "namePlaceHolder": "Device group name",
     "save": "Save",
     "errorMsg": {
+      "isRequired": "Is required",
       "nameCantBeEmpty": "Name is required",
       "fieldCantBeEmpty": "Field is required",
       "operatorCantBeEmpty": "Operator is required",
@@ -423,6 +424,25 @@
           "operatorPlaceholder": ">=",
           "value": "Value",
           "valuePlaceholder": "Enter value"
+        },
+        "actions":{
+          "actions": "Actions",
+          "action": "Action",
+          "emailActionLabel": "Send email",
+          "emailActionVal": "Email",
+          "noActionLabel": "No action",
+          "noActionVal": "None",
+          "addAction": "Add action",
+          "select": "Choose an action",
+          "selectionPlaceholder": "Select action",
+          "emailAddresses": "Email addresses",
+          "enterEmail": "Press enter to add email recipient",
+          "emailComments": "Email comments",
+          "enterEmailComments": "Enter comments for the email recipient",
+          "syntaxError": "Not a valid email address",
+          "on": "Email enabled",
+          "off": "Email disabled",
+          "sendEmailOnTrigger": "Send an email when alert is triggered"
         },
         "calculationOptions": {
           "average": "Average",

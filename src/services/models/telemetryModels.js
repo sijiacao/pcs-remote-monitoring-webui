@@ -49,7 +49,8 @@ export const toRuleModel = (response = {}) => {
     'calculation': 'calculation',
     'timePeriod': 'timePeriod',
     'action.type': 'type',
-    'deleted': 'deleted'
+    'deleted': 'deleted',
+    'actions': 'actions'
   });
   return update(model, {
     severity: { $set: (model.severity || '').toLowerCase() },
@@ -133,6 +134,7 @@ export const toEditRuleRequestModel = ({
   description,
   groupId,
   conditions,
+  actions,
   severity,
   enabled,
   calculation,
@@ -144,6 +146,15 @@ export const toEditRuleRequestModel = ({
     Operator: condition.operator,
     Value: condition.value
   }));
+
+  const Actions = actions.map(act => ({
+    Type: act.type,
+    Parameters: {
+      Template: act.parameters.template,
+      Email: act.parameters.email
+    }
+  }));
+
   return {
     Id: id,
     Name: name,
@@ -154,6 +165,7 @@ export const toEditRuleRequestModel = ({
     Calculation: calculation,
     TimePeriod: timePeriod,
     ETag: eTag,
-    Conditions
+    Conditions,
+    Actions
   };
 }

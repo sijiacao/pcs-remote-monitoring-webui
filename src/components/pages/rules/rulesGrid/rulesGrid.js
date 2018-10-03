@@ -18,6 +18,7 @@ const closedFlyoutState = {
 };
 
 export class RulesGrid extends Component {
+
   constructor(props) {
     super(props);
 
@@ -74,7 +75,7 @@ export class RulesGrid extends Component {
     };
   }
 
-  componentWillReceiveProps({rowData}) {
+  componentWillReceiveProps({ rowData }) {
     const { selectedRules = [], softSelectedRule } = this.state;
     if (rowData && (selectedRules.length || softSelectedRule)) {
       let updatedSoftSelectedRule = undefined;
@@ -150,6 +151,7 @@ export class RulesGrid extends Component {
     }
   }
 
+  /** Save the gridApi locally on load */
   onGridReady = gridReadyEvent => {
     this.gridApi = gridReadyEvent.api;
     if (isFunc(this.props.onGridReady)) {
