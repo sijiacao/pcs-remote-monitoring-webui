@@ -98,10 +98,6 @@ export class RuleEditor extends LinkedComponent {
       isPending: false,
       changesApplied: undefined
     };
-
-    this.formDataLink = this.linkTo('formData');
-    this.newEmailLink = this.linkTo('newEmail') // Matches email address pattern
-      .check(val => isEmail(val), () => this.props.t('rules.flyouts.ruleEditor.actions.syntaxError'));
   }
 
   componentDidMount() {
@@ -125,7 +121,7 @@ export class RuleEditor extends LinkedComponent {
         key: conditionKey++
       })),
       actions:
-        rule.actions.length === 0
+        !rule.actions || rule.actions.length === 0
         ? [newAction()]
         : rule.actions.map(action => ({ ...action, key: actionKey++ })
       ),
@@ -369,11 +365,13 @@ export class RuleEditor extends LinkedComponent {
       const error = fieldLink.error || operatorLink.error || valueLink.error;
       return { fieldLink, operatorLink, valueLink, error };
     });
+    this.newEmailLink = this.linkTo('newEmail') // Matches email address pattern
+      .check(val => isEmail(val), () => this.props.t('rules.flyouts.ruleEditor.actions.syntaxError'));
 
     const actionLinks = this.actionsLink.getLinkedChildren(actionLink => {
       const parametersLink = actionLink.forkTo('parameters');
       const recipientsLink = parametersLink.forkTo('recipients')
-        .check(Validator.notEmpty, this.props.t('deviceGroupsFlyout.errorMsg.isRequired'));
+        .check(Validator.notEmpty, this.props.t('rules.flyouts.ruleEditor.validation.required'));
       const notesLink = parametersLink.forkTo('notes');
       const subjectLink = parametersLink.forkTo('subject');
       const error = formData.actionEnabled ? (recipientsLink.error) : false;
@@ -581,9 +579,7 @@ export class RuleEditor extends LinkedComponent {
                 </FormGroup>
               </Section.Content>
             </Section.Container>
-
           </div>
-
         }
 
         <SummarySection>
@@ -599,7 +595,11 @@ export class RuleEditor extends LinkedComponent {
         {error && <AjaxError className="rule-editor-error" t={t} error={error} />}
         {
           <BtnToolbar>
-            <Btn primary={true} disabled={!!changesApplied || isPending || !this.formIsValid() || conditionsHaveErrors || actionsHaveErrors} type="submit">{t('rules.flyouts.ruleEditor.apply')}</Btn>
+            <Btn primary={true}
+                 disabled={!!changesApplied || isPending || !this.formIsValid() || conditionsHaveErrors || actionsHaveErrors}
+                 type="submit">
+                  {t('rules.flyouts.ruleEditor.apply')}
+            </Btn>
             <Btn svg={svgs.cancelX} onClick={this.onCloseClick}>{t('rules.flyouts.ruleEditor.cancel')}</Btn>
           </BtnToolbar>
         }

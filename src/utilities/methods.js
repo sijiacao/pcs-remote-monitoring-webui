@@ -30,7 +30,7 @@ export const stringToBoolean = value => {
   else if (str === 'false') return false;
 };
 
-/** Tests if value is an email address */
+/** Returns true if value is an email address */
 export const isEmail = value => {
   return value.match(/^$|^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 }

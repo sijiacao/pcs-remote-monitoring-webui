@@ -115,7 +115,6 @@ const modifyRulesReducer = (state, { payload }) => {
 
 const updateRulesReducer = (state, { payload, fromAction }) => {
   const { entities: { rules = {} }, result } = normalize(payload, ruleListSchema);
-  console.log('rules', rules);
   return update(state, {
     entities: { $set: rules },
     items: { $set: result },
