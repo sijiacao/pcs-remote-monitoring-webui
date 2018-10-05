@@ -163,7 +163,7 @@ export class RuleEditor extends LinkedComponent {
     event.preventDefault();
     const { insertRules, modifyRules, logEvent } = this.props;
     const requestProps = { ...this.state.formData };
-    const { devicesAffected } = this.state;
+    const { devicesAffected, newEmail } = this.state;
     if (requestProps.calculation === ruleCalculations[1]) requestProps.timePeriod = '';
     if (this.state.formData.actionEnabled === false) requestProps.actions = [];
     if (this.formIsValid()) {
@@ -179,6 +179,9 @@ export class RuleEditor extends LinkedComponent {
           erroe: undefined
         }
       };
+      if (this.state.formData.actionEnabled && newEmail !== '') {
+        requestProps.actions[0].parameters.recipients.push(newEmail);
+      }
       logEvent(toRuleDiagnosticsModel('Rule_ApplyClick', requestProps));
       if (this.props.rule) { // If rule object exist then update the existing rule
         this.subscription = TelemetryService.updateRule(this.props.rule.id, toEditRuleRequestModel(requestProps))
@@ -365,13 +368,17 @@ export class RuleEditor extends LinkedComponent {
       const error = fieldLink.error || operatorLink.error || valueLink.error;
       return { fieldLink, operatorLink, valueLink, error };
     });
+
     this.newEmailLink = this.linkTo('newEmail') // Matches email address pattern
       .check(val => isEmail(val), () => this.props.t('rules.flyouts.ruleEditor.actions.syntaxError'));
-
     const actionLinks = this.actionsLink.getLinkedChildren(actionLink => {
       const parametersLink = actionLink.forkTo('parameters');
+      // recipients is valid if email input box is empty and at least one email has been
+      // entered, or if email input box has a valid email
       const recipientsLink = parametersLink.forkTo('recipients')
-        .check(Validator.notEmpty, this.props.t('rules.flyouts.ruleEditor.validation.required'));
+        .check(val => ((this.state.newEmail !== '' && isEmail(this.state.newEmail))
+                        || (val.length > 0 && (isEmail(this.state.newEmail)))),
+         this.props.t('rules.flyouts.ruleEditor.validation.required'));
       const notesLink = parametersLink.forkTo('notes');
       const subjectLink = parametersLink.forkTo('subject');
       const error = formData.actionEnabled ? (recipientsLink.error) : false;
@@ -527,7 +534,7 @@ export class RuleEditor extends LinkedComponent {
                 </FormGroup>
               </Section.Content>
               <Section.Container collapsable={false}>
-                <Section.Header>{t('rules.flyouts.ruleEditor.actions.actions')}</Section.Header>
+                <Section.Header>{t('rules.flyouts.ruleEditor.actions.action')}</Section.Header>
                 <ToggleBtn
                   value={formData.actionEnabled}
                   onChange={this.onActionToggle} >
@@ -557,27 +564,29 @@ export class RuleEditor extends LinkedComponent {
                             link={action.subjectLink}
                             placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailSubject')}/>
                         </FormGroup>
-                        <p className="padded-top">{t('rules.flyouts.ruleEditor.actions.emailNotes')}</p>
+                        <p className="padded-top">{t('rules.flyouts.ruleEditor.actions.emailComments')}</p>
                         <FormGroup>
                           <FormControl
                             type="textarea"
                             link={action.notesLink}
-                            placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailNotes')} />
+                            placeholder={t('rules.flyouts.ruleEditor.actions.enterEmailComments')} />
                         </FormGroup>
                       </Section.Content>
                     ))}
                     </Section.Content>
               </Section.Container>
-              <Section.Content>
-                <FormGroup>
-                  <FormLabel>{t('rules.flyouts.ruleEditor.ruleStatus')}</FormLabel>
-                  <ToggleBtn
-                    value={formData.enabled}
-                    onChange={this.onStatusToggle} >
-                    {formData.enabled ? t('rules.flyouts.ruleEditor.ruleEnabled') : t('rules.flyouts.ruleEditor.ruleDisabled')}
-                  </ToggleBtn>
-                </FormGroup>
-              </Section.Content>
+              <Section.Container>
+                    <Section.Header>{t('rules.flyouts.ruleEditor.ruleStatus')}</Section.Header>
+                    <Section.Content>
+                  <FormGroup>
+                    <ToggleBtn
+                      value={formData.enabled}
+                      onChange={this.onStatusToggle} >
+                      {formData.enabled ? t('rules.flyouts.ruleEditor.ruleEnabled') : t('rules.flyouts.ruleEditor.ruleDisabled')}
+                    </ToggleBtn>
+                  </FormGroup>
+                </Section.Content>
+              </Section.Container>
             </Section.Container>
           </div>
         }
