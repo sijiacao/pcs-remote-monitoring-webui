@@ -179,9 +179,11 @@ export class RuleEditor extends LinkedComponent {
           erroe: undefined
         }
       };
+
       if (this.state.formData.actionEnabled && newEmail !== '') {
         requestProps.actions[0].parameters.recipients.push(newEmail);
       }
+
       logEvent(toRuleDiagnosticsModel('Rule_ApplyClick', requestProps));
       if (this.props.rule) { // If rule object exist then update the existing rule
         this.subscription = TelemetryService.updateRule(this.props.rule.id, toEditRuleRequestModel(requestProps))
@@ -504,9 +506,9 @@ export class RuleEditor extends LinkedComponent {
               </Section.Content>
             </Section.Container>
             <Section.Container collapsable={false}>
+              <Section.Header>{t('rules.flyouts.ruleEditor.severityLevel')}</Section.Header>
               <Section.Content>
-                <FormGroup className="padded-top">
-                  <FormLabel>{t('rules.flyouts.ruleEditor.severityLevel')}</FormLabel>
+                <FormGroup>
                   <Radio
                     onChange={this.onSeverityChange}
                     link={this.severityLink}
