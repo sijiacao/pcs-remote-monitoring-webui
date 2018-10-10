@@ -95,7 +95,7 @@ const initialState = { ...errorPendingInitialState, entities: {} };
 
 const insertDeploymentReducer = (state, { payload, fromAction }) => {
   const { entities: { deployments }, result } = normalize({ ...payload, isNew: true }, deploymentSchema);
-  if (state.entities) {
+  if (state.entities && state.entities.length > 0) {
     return update(state, {
       entities: { deployments: { $merge: deployments } },
       items: { $splice: [[0, 0, result]] },
