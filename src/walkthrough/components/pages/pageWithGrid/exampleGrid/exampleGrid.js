@@ -1,5 +1,7 @@
 // Copyright (c) Microsoft. All rights reserved.
 
+// <grid>
+
 import React, { Component } from 'react';
 import { Btn, ComponentArray, PcsGrid } from 'components/shared';
 import { exampleColumnDefs, defaultExampleGridProps } from './exampleGridConfig';
@@ -123,3 +125,4 @@ export class ExampleGrid extends Component {
     );
   }
 }
+// </grid>
